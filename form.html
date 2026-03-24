@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Form</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: 20px;
+      background: linear-gradient(135deg,#0095ff,#00ff44);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 30px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #ffffff;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+      background: #f9f9f9;
+    }
+
+    button {
+      margin-top: 35px;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #0095ff 0%, #00ff44 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Course Registration</h2>
+
+  <!-- IMPORTANT: Added ID here -->
+  <form id="registrationForm">
+
+    <label for="name">Full Name</label>
+    <input type="text" id="name" required />
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" required />
+
+    <label for="phone">Phone Number</label>
+    <input type="tel" id="phone" required />
+
+<label>Password</label>
+<input type="password" id="password" required/>
+
+    <label for="gender">Gender</label>
+    <select id="gender">
+      <option value="">Select</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="Address">Address</label>
+    <textarea id="Address" rows="3"></textarea>
+
+    <label for="course">Select Course</label>
+    <select id="course">
+      <option value="">Select</option>
+      <option value="Graphic Designing">Graphic Designing</option>
+      <option value="Photo Editing">Photo Editing</option>
+      <option value="Video Editing">Video Editing</option>
+    </select>
+
+    <button type="submit">SUBMIT REGISTRATION</button>
+
+  </form>
+</div>
+
+<!-- 🔥 Firebase Connected Here -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+import { getFirestore, doc, setDoc } 
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { getAuth, createUserWithEmailAndPassword } 
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBjiT9rd8CjmLKcKgrHz6JamT_SHOv0x3s",
+  authDomain: "minor-project-c2ec9.firebaseapp.com",
+  projectId: "minor-project-c2ec9",
+  storageBucket: "minor-project-c2ec9.firebasestorage.app",
+  messagingSenderId: "123551092488",
+  appId: "1:123551092488:web:592ed0d8371491c73b26bd",
+  measurementId: "G-1MKJ3SKJZ9"
+};
+
+const app = initializeApp(firebaseConfig);
+getAnalytics(app);
+
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+document.getElementById("registrationForm")
+.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const phone = document.getElementById("phone").value;
+  const gender = document.getElementById("gender").value;
+  const address = document.getElementById("Address").value;
+  const course = document.getElementById("course").value;
+
+  try {
+
+    // 🔐 1️⃣ Create Authentication Account
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // 📁 2️⃣ Save Extra Details in Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      name,
+      email,
+      phone,
+      gender,
+      address,
+      course,
+      createdAt: new Date()
+    });
+
+    // 🚀 3️⃣ Redirect to Home Page
+    window.location.href = "index.html";
+
+  } catch (error) {
+    alert(error.message);
+  }
+
+});
+
+</script>
+
+</body>
+</html>

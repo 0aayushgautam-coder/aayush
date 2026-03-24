@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Editing Masterclass | Pixel Coach</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #00C4CC; 
+            --secondary-color: #7d2ae8;
+            --bg-color: #05070a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text-main: #ffffff;
+            --text-sub: #94a3b8;
+            --accent-gradient: linear-gradient(135deg, #00C4CC 0%, #7d2ae8 100%);
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* --- Hero Section --- */
+        .video-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(5, 7, 10, 0.4), rgba(5, 7, 10, 1)), 
+                        url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin: 0;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        /* --- Grid Layout (FIXED) --- */
+        .main-content {
+            max-width: 1200px;
+            margin: -100px auto 100px;
+            padding: 0 20px;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            perspective: 1000px; /* Essential for 3D tilt */
+        }
+
+        /* --- Enhanced Card Design --- */
+        .module-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Focus effect for the grid */
+        .modules-grid:has(.module-card:hover) .module-card:not(:hover) {
+            opacity: 0.4;
+            filter: grayscale(0.5) blur(2px);
+            transform: scale(0.95);
+        }
+
+        .module-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 196, 204, 0.2);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        /* --- Buttons --- */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .yt-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            flex: 1;
+        }
+
+        .yt-btn.primary {
+            background: var(--accent-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 196, 204, 0.3);
+        }
+
+        .yt-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .yt-btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- Reveal Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 50px;
+            color: var(--text-sub);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <section class="video-hero">
+        <div class="hero-content">
+            <h1>Master the Edit</h1>
+            <p style="color: var(--text-sub); font-size: 1.2rem;">Craft stories that demand attention.</p>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="modules-grid">
+            <div class="module-card reveal">
+                <i class="fas fa-film"></i>
+                <h3>Narrative Cutting</h3>
+                <p>Learn pacing and rhythm techniques used by Hollywood editors.</p>
+                <div class="btn-group">
+                    <a href="https://youtube.com/playlist?list=PLIvvii1oTr9G9EyGpQYJ50godTuIi8IJM&si=IbL-nvJZ4gl50Br-" class="yt-btn primary">Beginner</a>
+                    <a href="https://youtube.com/playlist?list=PLIvvii1oTr9ECmGPJxJ-db4fsX01OHR0_&si=lTs65rYH6vlmfI1A" class="yt-btn secondary">Pro</a>
+                </div>
+            </div>
+
+            <div class="module-card reveal">
+                <i class="fas fa-droplet"></i>
+                <h3>Color Grading</h3>
+                <p>Master Lumetri Color and DaVinci Resolve for cinematic looks.</p>
+                <div class="btn-group">
+                    <a href="https://youtube.com/playlist?list=PLIvvii1oTr9HBk2eG6dzECl_zb7BtRugW&si=r9Ktwkd_suKX9OiM" class="yt-btn primary">Beginner</a>
+                    <a href="https://youtube.com/playlist?list=PLIvvii1oTr9H5EbzNreO8_hbUPxhLSMg0&si=pTE-FZupPWSdWwCL" class="yt-btn secondary">Pro</a>
+                </div>
+            </div>
+
+            <div class="module-card reveal">
+                <i class="fas fa-bolt"></i>
+                <h3>Motion Graphics</h3>
+                <p>Integrate After Effects for stunning titles and VFX overlays.</p>
+                <div class="btn-group">
+                    <a href="https://youtube.com/playlist?list=PLIvvii1oTr9FvkHl8_KWzbaUCwYB-daJw&si=28ZHPR-y0deVm-XL" class="yt-btn primary">Beginner</a>
+                    <a href="https://youtube.com/playlist?list=PLIvvii1oTr9HvT9jkR9QUQI3jSWdZR4K5&si=-yHR61LJnmmpe58C" class="yt-btn secondary">Pro</a>
+                </div>
+            </div>
+
+            <div class="module-card reveal">
+                <i class="fas fa-volume-high"></i>
+                <h3>Sound Effects</h3>
+                <p>Learn audio ducking and how to mix immersive soundscapes.</p>
+                <div class="btn-group">
+                    <a href="https://youtube.com/playlist?list=PLIvvii1oTr9G3Uks-HTN8vdXMsSTNZlu0&si=dd_XWZNG4guq8S_0" class="yt-btn primary">Sound Effects</a>
+                
+                </div>
+            </div>
+            <div class="module-card reveal">
+                <i class="fas fa-video"></i>
+                <h3>Stock Footage</h3>
+                <p>Download Stock Footages form these websites.</p>
+                <div class="btn-group">
+                    <a href="https://pixabay.com/videos/search/" class="yt-btn primary">Stock Footages</a>
+                    <a href="https://www.freepik.com/videos" class="yt-btn primary">Stock Footage</a>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        </div>
+    </main>
+
+    <script>
+        // 1. Improved Reveal Animation
+        const cards = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => observer.observe(card));
+
+        // 2. Fixed 3D Tilt Effect
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+    </script>
+</body>
+</html>
